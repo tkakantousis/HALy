@@ -4,3 +4,11 @@
 *.jar
 *.war
 *.ear
+
+#NetBeans fiels
+*.properties
+*.xml
+*.mf
+/nbproject/
+/build/
+/lib/
