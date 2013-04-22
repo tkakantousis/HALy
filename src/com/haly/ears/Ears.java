@@ -35,7 +35,7 @@ public class Ears implements Runnable
             
             if (result != null) {
                 String command = result.getBestFinalResultNoFiller();
-                brain.sendEvent(new BrainEvent(command));
+                brain.processEvent(new BrainEvent(command));
             }
         }
     }
