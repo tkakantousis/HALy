@@ -4,7 +4,13 @@ public enum BrainCommand
 {
     NOP("NOP"),
     OPEN("Open"),
-    CLOSE("Close");
+    CLOSE("Close"),
+    ON("On"),
+    OFF("Off"),
+    HELP("Help"),
+    LOCATE("Locate"),
+    REGISTER("Register"),
+    SHUTDOWN("Shutdown");
 
     private String descr;
     

@@ -25,6 +25,24 @@ public class BrainEvent
                 case "close":
                     this.command = BrainCommand.CLOSE;
                     break;
+                case "on":
+                    this.command = BrainCommand.ON;
+                    break;
+                case "off":
+                    this.command = BrainCommand.OFF;
+                    break;
+                case "help":
+                    this.command = BrainCommand.HELP;
+                    break;
+                case "locate":
+                    this.command = BrainCommand.LOCATE;
+                    break;
+                case "register":
+                    this.command = BrainCommand.REGISTER;
+                    break;
+                case "shutdown":
+                    this.command = BrainCommand.SHUTDOWN;
+                    break;
                 default:
                     this.command = BrainCommand.NOP;
                     break;
@@ -36,6 +54,30 @@ public class BrainEvent
                     break;
                 case "door":
                     this.subject = Subject.DOOR;
+                    break;
+                case "lights":
+                    this.subject = Subject.LIGHTS;
+                    break;
+                case "oven":
+                    this.subject = Subject.OVEN;
+                    break;
+                case "boiler":
+                    this.subject = Subject.BOILER;
+                    break;
+                case "tent":
+                    this.subject = Subject.TENT;
+                    break;
+                case "music":
+                    this.subject = Subject.MUSIC;
+                    break;
+                case "fridge":
+                    this.subject = Subject.FRIDGE;
+                    break;
+                case "ventilator":
+                    this.subject = Subject.VENTILATOR;
+                    break;
+                case "user":
+                    this.subject = Subject.USER;
                     break;
                 default:
                     this.subject = Subject.NONE;

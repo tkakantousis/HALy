@@ -4,7 +4,15 @@ public enum Subject
 {
     NONE("None"),
     WINDOW("Window"),
-    DOOR("Door");
+    DOOR("Door"),
+    LIGHTS("Lights"),
+    OVEN("Oven"),
+    BOILER("Boiler"),
+    TENT("Tent"),
+    MUSIC("Music"),
+    FRIDGE("Fridge"),
+    VENTILATOR("Ventilator"),
+    USER("User");
 
     private String descr;
     
