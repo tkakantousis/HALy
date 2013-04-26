@@ -10,6 +10,7 @@ public enum BrainCommand
     SEE("See"),
     NOT_SEE("Don't See"),
     HELP("Help"),
+    CALL("Call"),
     LOCATE("Locate"),
     REGISTER("Register"),
     SHUTDOWN("Shutdown");

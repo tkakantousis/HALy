@@ -12,6 +12,8 @@ public enum Subject
     MUSIC("Music"),
     FRIDGE("Fridge"),
     VENTILATOR("Ventilator"),
+    POLICE("Police"),
+    DEVICE("Device"),
     USER("User");
 
     private String descr;

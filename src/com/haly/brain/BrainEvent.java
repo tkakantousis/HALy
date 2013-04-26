@@ -41,6 +41,9 @@ public class BrainEvent
                 case "help":
                     this.command = BrainCommand.HELP;
                     break;
+                case "call":
+                    this.command = BrainCommand.CALL;
+                    break;
                 case "locate":
                     this.command = BrainCommand.LOCATE;
                     break;
@@ -82,6 +85,12 @@ public class BrainEvent
                     break;
                 case "ventilator":
                     this.subject = Subject.VENTILATOR;
+                    break;
+                case "police":
+                    this.subject = Subject.POLICE;
+                    break;
+                case "device":
+                    this.subject = Subject.DEVICE;
                     break;
                 case "user":
                     this.subject = Subject.USER;
