@@ -7,6 +7,8 @@ public enum BrainCommand
     CLOSE("Close"),
     ON("On"),
     OFF("Off"),
+    SEE("See"),
+    NOT_SEE("Don't See"),
     HELP("Help"),
     LOCATE("Locate"),
     REGISTER("Register"),

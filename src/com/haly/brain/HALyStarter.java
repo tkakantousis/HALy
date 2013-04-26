@@ -35,7 +35,7 @@ public class HALyStarter
         System.out.print("[HALy] Initializing eyes...");
         Eyes eyes = new Eyes(brain);
         Timer scheduler = new Timer();
-        scheduler.schedule(eyes, 0, 50);
+        scheduler.schedule(eyes, 0, 150);
         System.out.println("[OK]");
         
         System.out.print("[HALy] Initializing local server...");

@@ -4,10 +4,17 @@ public class BrainEvent
 {
     private BrainCommand command;
     private Subject subject;
-    
+    private User user;
+
     public BrainEvent(BrainCommand command, Subject subject) {
         this.command = command;
         this.subject = subject;
+    }
+    
+    public BrainEvent(BrainCommand command, Subject subject, User user) {
+        this.command = command;
+        this.subject = subject;
+        this.user = user;
     }
 
     public BrainEvent(String command) {
@@ -100,5 +107,13 @@ public class BrainEvent
 
     public void setSubject(Subject subject) {
         this.subject = subject;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
