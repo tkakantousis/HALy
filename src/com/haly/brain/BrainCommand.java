@@ -13,7 +13,7 @@ public enum BrainCommand
     CALL("Call"),
     LOCATE("Locate"),
     REGISTER("Register"),
-    SHUTDOWN("Shutdown");
+    SHUTDOWN("Sleep");
 
     private String descr;
     

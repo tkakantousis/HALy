@@ -55,4 +55,28 @@ public class User implements Comparable
         User u = (User) o;
         return this.getID() - u.getID();
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 11 * hash + this.ID;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final User other = (User) obj;
+        if (this.ID != other.ID) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }

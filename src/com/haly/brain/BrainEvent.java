@@ -32,12 +32,12 @@ public class BrainEvent
                 case "close":
                     this.command = BrainCommand.CLOSE;
                     break;
-                case "on":
-                    this.command = BrainCommand.ON;
-                    break;
-                case "off":
-                    this.command = BrainCommand.OFF;
-                    break;
+//                case "on":
+//                    this.command = BrainCommand.ON;
+//                    break;
+//                case "off":
+//                    this.command = BrainCommand.OFF;
+//                    break;
                 case "help":
                     this.command = BrainCommand.HELP;
                     break;
@@ -62,9 +62,9 @@ public class BrainEvent
                 case "window":
                     this.subject = Subject.WINDOW;
                     break;
-                case "door":
-                    this.subject = Subject.DOOR;
-                    break;
+//                case "door":
+//                    this.subject = Subject.DOOR;
+//                    break;
                 case "lights":
                     this.subject = Subject.LIGHTS;
                     break;
