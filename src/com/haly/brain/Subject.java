@@ -6,15 +6,10 @@ public enum Subject
     WINDOW("Window"),
     DOOR("Door"),
     LIGHTS("Lights"),
-    OVEN("Oven"),
-    BOILER("Boiler"),
-    TENT("Tent"),
-    MUSIC("Music"),
-    FRIDGE("Fridge"),
-    VENTILATOR("Ventilator"),
     POLICE("Police"),
     DEVICE("Device"),
-    USER("User");
+    USER("User"),
+    SYSTEM("System");
 
     private String descr;
     

@@ -14,32 +14,34 @@ import java.util.Timer;
 public class HALyStarter
 {
     public static void main(String[] args) {
+        Server server = null;
+
         System.out.print("[HALy] Initializing mouth...");
         Mouth mouth = new FreeTTS();
         mouth.speak("Hello, my name is Hal!");
         System.out.println("[OK]");
-        
+
         System.out.print("[HALy Initializing local client...");
         Client client = new HalyClient();
         System.out.println("[OK]");
-        
+
         System.out.print("[HALy] Initializing brain...");
-        Brain brain = new HALy(mouth, client);
+        Brain brain = new HALy(mouth, server, client);
         System.out.println("[OK]");
-        
+
         System.out.print("[HALy] Initializing ears...");
         Ears ears = new Ears(brain);
         new Thread(ears).start();
         System.out.println("[OK]");
-        
+
         System.out.print("[HALy] Initializing eyes...");
         Eyes eyes = new Eyes(brain);
         Timer scheduler = new Timer();
         scheduler.schedule(eyes, 0, 150);
         System.out.println("[OK]");
-        
+
         System.out.print("[HALy] Initializing local server...");
-        Server server = new HalyServer(brain);
+        server = new HalyServer(brain);
         server.start();
         System.out.println("[OK]");
     }

@@ -79,6 +79,10 @@ public class HalyServer implements Server
         this.registrationID = registrationID;
     }
 
+    private String getLocationName() {
+        return "";
+    }
+
     static class RequestHandler implements HttpHandler
     {
         Brain brain;
@@ -93,13 +97,18 @@ public class HalyServer implements Server
         public void handle(HttpExchange exchange) throws IOException {
             BrainStatus status = BrainStatus.OK;
             Map<String, Object> params = (Map<String, Object>) exchange.getAttribute("parameters");
-
             // TODO Handle Longitude and latitude in the requests
-            if (((String) params.get("command")).equals("REGISTER_DEVICE")) {
-                server.setRegistrationID((String) params.get("registrationID"));
-            }
-            else {
-                status = brain.processEvent(new BrainEvent(BrainCommand.valueOf((String) params.get("command")), Subject.valueOf((String) params.get("subject"))));
+            switch ((String) params.get("command")) {
+                case "REGISTER_DEVICE":
+                    server.setRegistrationID((String) params.get("registrationID"));
+                    break;
+                case "LOCATE":
+                    String location = getLocationName((String) params.get("lon"), (String) params.get("lat"));
+                    status = brain.processEvent(new BrainEvent(BrainCommand.valueOf((String) params.get("command")), location));
+                    break;
+                default:
+                    status = brain.processEvent(new BrainEvent(BrainCommand.valueOf((String) params.get("command")), Subject.valueOf((String) params.get("subject"))));
+                    break;
             }
 
             String response;
@@ -114,6 +123,10 @@ public class HalyServer implements Server
             try (OutputStream os = exchange.getResponseBody()) {
                 os.write(response.getBytes());
             }
+        }
+
+        private String getLocationName(String longitude, String latitude) {
+            return "";
         }
     }
 

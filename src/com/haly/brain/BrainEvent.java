@@ -5,12 +5,18 @@ public class BrainEvent
     private BrainCommand command;
     private Subject subject;
     private User user;
+    private String extra;
+
+    public BrainEvent(BrainCommand command, String extra) {
+        this.command = command;
+        this.extra = extra;
+    }
 
     public BrainEvent(BrainCommand command, Subject subject) {
         this.command = command;
         this.subject = subject;
     }
-    
+
     public BrainEvent(BrainCommand command, Subject subject, User user) {
         this.command = command;
         this.subject = subject;
@@ -32,12 +38,6 @@ public class BrainEvent
                 case "close":
                     this.command = BrainCommand.CLOSE;
                     break;
-//                case "on":
-//                    this.command = BrainCommand.ON;
-//                    break;
-//                case "off":
-//                    this.command = BrainCommand.OFF;
-//                    break;
                 case "help":
                     this.command = BrainCommand.HELP;
                     break;
@@ -46,9 +46,6 @@ public class BrainEvent
                     break;
                 case "locate":
                     this.command = BrainCommand.LOCATE;
-                    break;
-                case "register":
-                    this.command = BrainCommand.REGISTER;
                     break;
                 case "shutdown":
                     this.command = BrainCommand.SHUTDOWN;
@@ -62,29 +59,11 @@ public class BrainEvent
                 case "window":
                     this.subject = Subject.WINDOW;
                     break;
-//                case "door":
-//                    this.subject = Subject.DOOR;
-//                    break;
+                case "door":
+                    this.subject = Subject.DOOR;
+                    break;
                 case "lights":
                     this.subject = Subject.LIGHTS;
-                    break;
-                case "oven":
-                    this.subject = Subject.OVEN;
-                    break;
-                case "boiler":
-                    this.subject = Subject.BOILER;
-                    break;
-                case "tent":
-                    this.subject = Subject.TENT;
-                    break;
-                case "music":
-                    this.subject = Subject.MUSIC;
-                    break;
-                case "fridge":
-                    this.subject = Subject.FRIDGE;
-                    break;
-                case "ventilator":
-                    this.subject = Subject.VENTILATOR;
                     break;
                 case "police":
                     this.subject = Subject.POLICE;
@@ -94,6 +73,9 @@ public class BrainEvent
                     break;
                 case "user":
                     this.subject = Subject.USER;
+                    break;
+                case "system":
+                    this.subject = Subject.SYSTEM;
                     break;
                 default:
                     this.subject = Subject.NONE;
@@ -124,5 +106,13 @@ public class BrainEvent
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getExtra() {
+        return extra;
+    }
+
+    public void setExtra(String extra) {
+        this.extra = extra;
     }
 }

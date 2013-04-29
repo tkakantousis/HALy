@@ -1,19 +1,23 @@
 package com.haly.brain;
 
 import com.haly.brain.client.Client;
+import com.haly.brain.server.Server;
 import com.haly.mouth.Mouth;
 import java.util.HashSet;
 import java.util.Set;
 
-public class HALy implements Brain {
 
-    Mouth mouth;
-    Client client;
-    User userInView;
-    Set<User> authorizationSet;
+public class HALy implements Brain
+{
+    private Mouth mouth;
+    private Server server;
+    private Client client;
+    private User userInView;
+    private Set<User> authorizationSet;
 
-    public HALy(Mouth mouth, Client client) {
+    public HALy(Mouth mouth, Server server, Client client) {
         this.mouth = mouth;
+        this.server = server;
         this.client = client;
         authorizationSet = new HashSet<>();
         authorizationSet.add(new User(0, "Unknown-0", null));
@@ -23,6 +27,7 @@ public class HALy implements Brain {
     public synchronized BrainStatus processEvent(BrainEvent event) {
         System.out.println("[BRAIN] Got event with command " + event.getCommand() + " and subject " + event.getSubject() + "!");
         //If we found a new User, add him to the list
+
         BrainCommand bm = event.getCommand();
         switch (bm) {
             case SEE:
@@ -55,7 +60,12 @@ public class HALy implements Brain {
                 }
                 break;
             case HELP:
-                client.hsSendNotification(DeviceNotification.HELP);
+                Subject sbj3 = event.getSubject();
+                switch (sbj3) {
+                    case USER:
+//                        client.hsSendNotification(DeviceNotification.HELP);
+                        break;
+                }
                 break;
             case CALL:
                 Subject sbj2 = event.getSubject();
@@ -87,9 +97,14 @@ public class HALy implements Brain {
         if (userInView == null) {
             mouth.speak("Get in front of camera");
             return false;
-        } else if (userInView != null && authorizationSet.contains(userInView)) {
+        }
+        else if (userInView != null && authorizationSet.contains(userInView)) {
             System.out.println(userInView.getName() + " is authorized");
             return true;
+        }
+        else if (userInView != null && !authorizationSet.contains(userInView)) {
+            System.out.println(userInView.getName() + " is not authorized");
+            return false;
         }
         return false;
     }
@@ -107,32 +122,22 @@ public class HALy implements Brain {
                     doCommand(event);
                 }
                 break;
-            case OVEN:
+            case DOOR:
                 if (checkUserInView()) {
                     doCommand(event);
                 }
                 break;
-            case BOILER:
+            case POLICE:
                 if (checkUserInView()) {
                     doCommand(event);
                 }
                 break;
-            case TENT:
+            case DEVICE:
                 if (checkUserInView()) {
                     doCommand(event);
                 }
                 break;
-            case MUSIC:
-                if (checkUserInView()) {
-                    doCommand(event);
-                }
-                break;
-            case FRIDGE:
-                if (checkUserInView()) {
-                    doCommand(event);
-                }
-                break;
-            case VENTILATOR:
+            case USER:
                 if (checkUserInView()) {
                     doCommand(event);
                 }
