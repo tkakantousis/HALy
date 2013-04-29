@@ -20,26 +20,29 @@ public class HALy implements Brain
         this.server = server;
         this.client = client;
         authorizationSet = new HashSet<>();
-        authorizationSet.add(new User(0, "Unknown-0", null));
+        authorizationSet.add(new User(0, "Jane-0", null));
+    }
+
+    @Override
+    public void setServer(Server server) {
+        this.server = server;
     }
 
     @Override
     public synchronized BrainStatus processEvent(BrainEvent event) {
         System.out.println("[BRAIN] Got event with command " + event.getCommand() + " and subject " + event.getSubject() + "!");
-        //If we found a new User, add him to the list
 
-        BrainCommand bm = event.getCommand();
-        switch (bm) {
+
+        BrainCommand bc = event.getCommand();
+        switch (bc) {
             case SEE:
                 if (event.getUser() != null) {
                     if (userInView == null || (userInView != null && !userInView.equals(event.getUser()))) {
                         userInView = event.getUser();
-                        System.out.println("Got new user with name:" + userInView.getName());
                     }
                 }
                 break;
             case NOT_SEE:
-                //If noone is in front of the camera, current user is set to null
                 userInView = null;
                 break;
             case OPEN:
@@ -48,44 +51,35 @@ public class HALy implements Brain
             case CLOSE:
                 processOpenCloseCommands(event);
                 break;
-            case LOCATE:
-                Subject sbj1 = event.getSubject();
-                switch (sbj1) {
-                    case USER:
-                        //JSONObject js =  client.hsSendNotification(DeviceNotification.HELP);
-                        //System.out.println(js.getJSONArray("results").getJSONObject(0).getJSONArray("address_components").getJSONObject(0).getString("long_name"));
-                        //System.out.println(js.getJSONArray("results").getJSONObject(0).getJSONArray("address_components").getJSONObject(1).getString("long_name"));
-
-                        break;
+            case FIND:
+                if (checkUserInView()) {
+                    if (event.getSubject() == Subject.MOTHER) {
+                        server.notifyDevice(bc.toString(), "Where are you?!");
+                    }
+                    else if (event.getSubject() == null) {
+                        mouth.speak("Mother is at " + event.getExtra());
+                    }
                 }
                 break;
             case HELP:
-                Subject sbj3 = event.getSubject();
-                switch (sbj3) {
-                    case USER:
-//                        client.hsSendNotification(DeviceNotification.HELP);
-                        break;
+                if (checkUserInView()) {
+                    server.notifyDevice(bc.toString(), "Help meeeee...!!");
                 }
                 break;
             case CALL:
-                Subject sbj2 = event.getSubject();
-                switch (sbj2) {
-                    case POLICE:
-                        break;
+                if (event.getSubject() == Subject.POLICE) {
+                    mouth.speak("I am calling the cops!");
                 }
                 break;
             case SHUTDOWN:
-                doCommand(event);
-                System.exit(0);
+                if (checkUserInView() && event.getSubject() == Subject.SYSTEM) {
+                    mouth.speak("I am going to sleep! Goodbye, " + userInView.getName());
+                    System.exit(0);
+                }
             default:
                 break;
         }
-
         return BrainStatus.OK;
-    }
-
-    private void doCommand(BrainEvent event) {
-        mouth.speak("I will " + event.getCommand() + " " + event.getSubject());
     }
 
     /**
@@ -95,16 +89,13 @@ public class HALy implements Brain
      */
     private boolean checkUserInView() {
         if (userInView == null) {
-            mouth.speak("Get in front of camera");
-            return false;
+            mouth.speak("Get in front of camera!");
         }
         else if (userInView != null && authorizationSet.contains(userInView)) {
-            System.out.println(userInView.getName() + " is authorized");
             return true;
         }
         else if (userInView != null && !authorizationSet.contains(userInView)) {
-            System.out.println(userInView.getName() + " is not authorized");
-            return false;
+            mouth.speak("You are not authorized to execute this command!");
         }
         return false;
     }
@@ -113,37 +104,14 @@ public class HALy implements Brain
         Subject sbj = event.getSubject();
         switch (sbj) {
             case WINDOW:
-                if (checkUserInView()) {
-                    doCommand(event);
-                }
-                break;
             case LIGHTS:
-                if (checkUserInView()) {
-                    doCommand(event);
-                }
-                break;
             case DOOR:
                 if (checkUserInView()) {
-                    doCommand(event);
-                }
-                break;
-            case POLICE:
-                if (checkUserInView()) {
-                    doCommand(event);
-                }
-                break;
-            case DEVICE:
-                if (checkUserInView()) {
-                    doCommand(event);
-                }
-                break;
-            case USER:
-                if (checkUserInView()) {
-                    doCommand(event);
+                    mouth.speak("I will " + event.getCommand() + " " + event.getSubject());
                 }
                 break;
             default:
-                mouth.speak("I can not execute this command");
+                mouth.speak("I can not execute this command!");
         }
     }
 }

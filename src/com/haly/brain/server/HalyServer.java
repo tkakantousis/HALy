@@ -23,7 +23,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -104,7 +103,7 @@ public class HalyServer implements Server {
                 case "REGISTER_DEVICE":
                     server.setRegistrationID((String) params.get("registrationID"));
                     break;
-                case "LOCATE":
+                case "FIND":
                     String location = getLocationName((String) params.get("lon"), (String) params.get("lat"));
                     status = brain.processEvent(new BrainEvent(BrainCommand.valueOf((String) params.get("command")), location));
                     break;
@@ -143,8 +142,8 @@ public class HalyServer implements Server {
                 }
                 JSONObject js = new JSONObject(sbResponse.toString());
                
-                location+=js.getJSONArray("results").getJSONObject(0).getJSONArray("address_components").getJSONObject(2).getString("long_name");
-                location+=js.getJSONArray("results").getJSONObject(0).getJSONArray("address_components").getJSONObject(1).getString("long_name");
+                location+=js.getJSONArray("results").getJSONObject(0).getJSONArray("address_components").getJSONObject(2).getString("long_name") + ".";
+                location+=js.getJSONArray("results").getJSONObject(0).getJSONArray("address_components").getJSONObject(1).getString("long_name") + ".";
                 location+=js.getJSONArray("results").getJSONObject(0).getJSONArray("address_components").getJSONObject(0).getString("long_name");
 
                

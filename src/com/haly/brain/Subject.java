@@ -7,7 +7,7 @@ public enum Subject
     DOOR("Door"),
     LIGHTS("Lights"),
     POLICE("Police"),
-    DEVICE("Device"),
+    MOTHER("Mother"),
     USER("User"),
     SYSTEM("System");
 

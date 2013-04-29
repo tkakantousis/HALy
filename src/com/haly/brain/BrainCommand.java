@@ -9,7 +9,7 @@ public enum BrainCommand
     NOT_SEE("Don't See"),
     HELP("Help"),
     CALL("Call"),
-    LOCATE("Locate"),
+    FIND("Find"),
     SHUTDOWN("Shutdown");
 
     private String descr;

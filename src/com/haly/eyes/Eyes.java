@@ -113,7 +113,7 @@ public class Eyes extends TimerTask
                             biometrics.add(currentBiometrics);
                             if (biometrics.size() > BIOMETRIC_SAMPLES) {
                                 ArrayList<FSDK.FSDK_FaceTemplate.ByReference> newBiometrics = new ArrayList<>(biometrics);
-                                users.add(new User(ID, "Unknown-" + ID++, newBiometrics));
+                                users.add(new User(ID, "Jane-" + ID++, newBiometrics));
                                 biometrics.clear();
                                 state = EyeState.RECOGNIZING;
                             }

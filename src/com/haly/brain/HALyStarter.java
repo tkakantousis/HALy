@@ -43,6 +43,7 @@ public class HALyStarter
         System.out.print("[HALy] Initializing local server...");
         server = new HalyServer(brain);
         server.start();
+        brain.setServer(server);
         System.out.println("[OK]");
     }
 }

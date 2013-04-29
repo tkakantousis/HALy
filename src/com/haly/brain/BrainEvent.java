@@ -44,8 +44,8 @@ public class BrainEvent
                 case "call":
                     this.command = BrainCommand.CALL;
                     break;
-                case "locate":
-                    this.command = BrainCommand.LOCATE;
+                case "find":
+                    this.command = BrainCommand.FIND;
                     break;
                 case "shutdown":
                     this.command = BrainCommand.SHUTDOWN;
@@ -68,8 +68,8 @@ public class BrainEvent
                 case "police":
                     this.subject = Subject.POLICE;
                     break;
-                case "device":
-                    this.subject = Subject.DEVICE;
+                case "mother":
+                    this.subject = Subject.MOTHER;
                     break;
                 case "user":
                     this.subject = Subject.USER;

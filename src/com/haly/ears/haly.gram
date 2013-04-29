@@ -8,5 +8,5 @@ grammar haly;
 
 public <basicCmd> = (Hal) <command> <subject>;
 
-<command> = (open | close | help | locate | shutdown | call);
-<subject> = (window | door | lights | user | device | police | system);
+<command> = (open | close | help | find | shutdown | call);
+<subject> = (window | door | lights | user | mother | police | system);
