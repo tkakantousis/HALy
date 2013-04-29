@@ -130,7 +130,7 @@ public class HalyServer implements Server {
              String location="";
             try {
                 HttpClient client = new DefaultHttpClient();
-                String latlon = longitude+","+latitude; // 59.3822354,18.0297901
+                String latlon = latitude+","+longitude; // 59.3822354,18.0297901
                 HttpGet request = new HttpGet("http://maps.googleapis.com/maps/api/geocode/json?latlng="+latlon+"&sensor=false");
                 HttpResponse response = client.execute(request);
                 StringBuilder sbResponse;
