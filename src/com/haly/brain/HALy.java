@@ -62,7 +62,7 @@ public class HALy implements Brain
                 }
                 break;
             case HELP:
-                if (checkUserInView()) {
+                if (checkUserInView() && event.getSubject() == Subject.USER) {
                     server.notifyDevice(bc.toString(), "Help meeeee...!!");
                 }
                 break;
@@ -77,6 +77,9 @@ public class HALy implements Brain
                     System.exit(0);
                 }
             default:
+                if(event.getCommand() != BrainCommand.NOP && event.getSubject() != Subject.NONE) {
+                    mouth.speak("I can not execute this command!");
+                }
                 break;
         }
         return BrainStatus.OK;
@@ -103,8 +106,6 @@ public class HALy implements Brain
     private void processOpenCloseCommands(BrainEvent event) {
         Subject sbj = event.getSubject();
         switch (sbj) {
-            case WINDOW:
-            case LIGHTS:
             case DOOR:
                 if (checkUserInView()) {
                     mouth.speak("I will " + event.getCommand() + " " + event.getSubject());
